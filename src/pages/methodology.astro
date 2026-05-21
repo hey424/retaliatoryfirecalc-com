@@ -1,0 +1,13 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const title = 'Methodology | retaliatoryfirecalc.com';
+const description = 'How the retaliatory discharge damages calculator works across Title VII, FLSA, Section 1981, and state law frameworks.';
+---
+<BaseLayout title={title} description={description}>
+  <h1>Methodology</h1>
+  <p><em>Reviewed by Riley Chen (RC), Employment &amp; Civil Rights Practice Lead. Updated May 2026.</em></p>
+  <h2>Title VII retaliation</h2><p>Back pay + front pay (uncapped) + compensatory (40% of cap) + punitive (30% of cap). Cap by employer size: $50K/$100K/$200K/$300K.</p>
+  <h2>FLSA retaliation</h2><p>Back pay + equal liquidated damages (automatic doubling). No cap. Plus attorney fees. The liquidated damages provision mirrors the FMLA and ADEA frameworks.</p>
+  <h2>Section 1981 (race)</h2><p>No damages caps. Compensatory estimated at 80% of back pay; punitive at 120% of back pay. Wide range reflects variability in uncapped jury verdicts.</p>
+  <h2>Workers&rsquo; comp / state / OSHA</h2><p>Highly state-specific. Calculator estimates compensatory at 50% of back pay as a conservative proxy. Actual damages vary from full reinstatement + back pay to treble damages depending on state law.</p>
+</BaseLayout>
