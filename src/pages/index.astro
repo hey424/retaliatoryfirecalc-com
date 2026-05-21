@@ -1,0 +1,74 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+const title = 'Retaliatory Discharge Damages Calculator | retaliatoryfirecalc.com';
+const description = 'Estimate potential damages for retaliatory termination under Title VII, FLSA, OSHA, workers comp retaliation, and state wrongful termination. Free, informational.';
+---
+<BaseLayout title={title} description={description}>
+  <h1>Retaliatory Discharge Damages Calculator</h1>
+  <p><em>Reviewed by Riley Chen (RC), Employment &amp; Civil Rights Practice Lead. Updated May 2026.</em></p>
+  <p>Retaliatory discharge occurs when an employer fires, demotes, or otherwise punishes an employee for engaging in legally protected activity: filing a discrimination complaint, reporting wage theft, filing a workers&rsquo; compensation claim, reporting safety violations, or refusing to participate in illegal conduct. Over 60 federal statutes and all 50 state laws prohibit various forms of retaliation. This calculator estimates potential recovery.</p>
+  <h2>Run the estimate</h2>
+  <form id="calc" novalidate>
+    <label for="annual-salary">Annual salary (USD)</label>
+    <input id="annual-salary" type="number" value="65000" min="0" />
+    <label for="months-lost">Months of lost employment</label>
+    <input id="months-lost" type="number" value="9" min="0" max="60" />
+    <label for="statute">Primary retaliation statute</label>
+    <select id="statute">
+      <option value="title7">Title VII — discrimination/harassment complaint</option>
+      <option value="flsa">FLSA — wage/overtime complaint</option>
+      <option value="osha">OSHA / safety complaint retaliation</option>
+      <option value="workers-comp">Workers&rsquo; comp retaliation (state law)</option>
+      <option value="state-wrongful">State wrongful termination / whistleblower</option>
+      <option value="section1981">Section 1981 — race discrimination (uncapped)</option>
+    </select>
+    <label for="employer-size">Employer size (for Title VII cap)</label>
+    <select id="employer-size">
+      <option value="15-100">15–100 employees</option>
+      <option value="101-200">101–200 employees</option>
+      <option value="201-500">201–500 employees</option>
+      <option value="500plus">500+ employees</option>
+    </select>
+    <label for="found-work">Have you found comparable replacement work?</label>
+    <select id="found-work">
+      <option value="no">Not yet</option>
+      <option value="partial">Partial — lower-paying position</option>
+      <option value="yes">Yes — comparable position found</option>
+    </select>
+    <button type="submit">Estimate damages</button>
+  </form>
+  <p id="result" aria-live="polite"></p>
+  <h2>How retaliation damages work</h2>
+  <p>Retaliation damages follow the statute under which the claim is brought. Title VII retaliation: back pay (uncapped) + compensatory/punitive (capped by employer size) + front pay + attorney fees. FLSA retaliation: lost wages + equal amount in liquidated damages + attorney fees. Workers&rsquo; comp retaliation: varies by state (often includes reinstatement, back pay, and multiplied damages). Section 1981 (race): no caps — compensatory, punitive, and front pay are all uncapped.</p>
+  <h2>Where to learn more</h2>
+  <p>See <a href="/guides/how-retaliation-claims-work">how retaliation claims work</a>, <a href="/guides/types-of-retaliation">types of protected activity and retaliation</a>, <a href="/guides/what-to-do-after-retaliatory-firing">what to do after retaliatory firing</a>, and <a href="/guides/retaliation-misconceptions">common misconceptions</a>.</p>
+  <script>
+    document.getElementById('calc').addEventListener('submit', e => {
+      e.preventDefault();
+      const salary = parseFloat(document.getElementById('annual-salary').value)||65000;
+      const monthsLost = parseFloat(document.getElementById('months-lost').value)||0;
+      const statute = document.getElementById('statute').value;
+      const empSize = document.getElementById('employer-size').value;
+      const foundWork = document.getElementById('found-work').value;
+      const mitigation = foundWork==='yes' ? 0.7 : (foundWork==='partial' ? 0.35 : 0);
+      const backPay = (salary/12)*monthsLost*(1-mitigation);
+      const frontPay = foundWork!=='yes' ? salary*0.5 : 0;
+      const caps = {'15-100':50000,'101-200':100000,'201-500':200000,'500plus':300000};
+      let comp=0, punitive=0, liquidated=0;
+      if (statute==='title7') {
+        const cap = caps[empSize];
+        comp = cap*0.4; punitive = cap*0.3;
+      } else if (statute==='flsa') {
+        liquidated = backPay; // FLSA doubles back pay
+      } else if (statute==='section1981') {
+        comp = backPay*0.8; punitive = backPay*1.2; // uncapped
+      } else {
+        comp = backPay*0.5; // workers comp / state / OSHA: varies
+      }
+      const total = backPay + frontPay + comp + punitive + liquidated;
+      const fmt = n=>'$'+Math.round(n).toLocaleString();
+      document.getElementById('result').innerHTML =
+        `<strong>Estimated range: ${fmt(total*0.55)} &ndash; ${fmt(total*1.35)}</strong><br>Back pay: ${fmt(backPay)} &bull; Front pay: ${fmt(frontPay)} &bull; Compensatory: ${fmt(comp)} &bull; Punitive/Liquidated: ${fmt(punitive||liquidated)}<br><em>Attorney fees recoverable under most anti-retaliation statutes. Consult an employment attorney promptly — EEOC charge deadlines are short.</em>`;
+    });
+  </script>
+</BaseLayout>
