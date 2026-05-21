@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://retaliatoryfirecalc.com/sitemap-index.xml
