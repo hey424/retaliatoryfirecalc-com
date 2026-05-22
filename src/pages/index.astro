@@ -5,9 +5,10 @@ const description = 'Estimate potential damages for retaliatory termination unde
 ---
 <BaseLayout title={title} description={description}>
   <h1>Retaliatory Discharge Damages Calculator</h1>
-  <p><em>Reviewed by Riley Chen (RC), Employment &amp; Civil Rights Practice Lead. Updated May 2026.</em></p>
-  <p>Retaliatory discharge occurs when an employer fires, demotes, or otherwise punishes an employee for engaging in legally protected activity: filing a discrimination complaint, reporting wage theft, filing a workers&rsquo; compensation claim, reporting safety violations, or refusing to participate in illegal conduct. Over 60 federal statutes and all 50 state laws prohibit various forms of retaliation. This calculator estimates potential recovery.</p>
-  <h2>Run the estimate</h2>
+  <p><em>Reviewed by Cleo Delmar (CD), Editor-in-Chief &mdash; Employment & Civil Rights Practice. Updated May 2026.</em></p>
+  <p>Federal anti-retaliation law protects employees who report wage violations, file discrimination complaints, report workplace safety hazards, or file workers&rsquo; compensation claims. When an employer fires, demotes, or otherwise punishes an employee for engaging in these legally protected activities, the employee may have claims under Title VII, the FLSA, OSHA, Section 1981, state whistleblower statutes, or some combination of these frameworks. This calculator estimates potential damages based on the applicable statute, your salary, the duration of your job loss, and your mitigation status. Actual outcomes are determined by courts and juries — consult an employment attorney before making any decisions.</p>
+
+  <h2>Run the Estimate</h2>
   <form id="calc" novalidate>
     <label for="annual-salary">Annual salary (USD)</label>
     <input id="annual-salary" type="number" value="65000" min="0" />
@@ -38,10 +39,46 @@ const description = 'Estimate potential damages for retaliatory termination unde
     <button type="submit">Estimate damages</button>
   </form>
   <p id="result" aria-live="polite"></p>
-  <h2>How retaliation damages work</h2>
-  <p>Retaliation damages follow the statute under which the claim is brought. Title VII retaliation: back pay (uncapped) + compensatory/punitive (capped by employer size) + front pay + attorney fees. FLSA retaliation: lost wages + equal amount in liquidated damages + attorney fees. Workers&rsquo; comp retaliation: varies by state (often includes reinstatement, back pay, and multiplied damages). Section 1981 (race): no caps — compensatory, punitive, and front pay are all uncapped.</p>
-  <h2>Where to learn more</h2>
-  <p>See <a href="/guides/how-retaliation-claims-work">how retaliation claims work</a>, <a href="/guides/types-of-retaliation">types of protected activity and retaliation</a>, <a href="/guides/what-to-do-after-retaliatory-firing">what to do after retaliatory firing</a>, and <a href="/guides/retaliation-misconceptions">common misconceptions</a>.</p>
+
+  <h2>How Retaliation Damages Are Calculated</h2>
+  <p>Retaliation damages are statute-specific — the amount recoverable and the components of the award depend entirely on which anti-retaliation law applies to your situation. There is no single unified framework, which is why identifying the right statute is the first step in any retaliation claim analysis. Here is how each major framework works:</p>
+
+  <h3>Title VII Retaliation (42 U.S.C. &sect; 2000e-3)</h3>
+  <p>Title VII retaliation damages include back pay (uncapped) from the date of the adverse action through the date of judgment, front pay (awarded in lieu of reinstatement when reinstatement is impractical), and compensatory and punitive damages capped by employer size: $50,000 for employers with 15–100 employees; $100,000 for 101–200 employees; $200,000 for 201–500 employees; and $300,000 for employers with more than 500 employees. These caps apply to the combined compensatory-plus-punitive total. Back pay is not subject to the cap and can far exceed it in long cases. Attorney fees are mandatory if you prevail — the defendant must pay.</p>
+
+  <h3>FLSA Retaliation (29 U.S.C. &sect; 215(a)(3))</h3>
+  <p>The FLSA&rsquo;s retaliation provision is unusually favorable to employees because of the liquidated damages requirement: a successful plaintiff receives lost wages plus an equal amount in liquidated damages — effectively doubling the back pay component automatically. The employer can only avoid liquidated damages by proving good faith and a reasonable belief that the conduct was lawful, a burden that employers rarely meet when retaliatory intent is established. There are no employer-size caps. Attorney fees are recoverable. The statute of limitations is two years (three for willful violations), and no EEOC exhaustion is required — you can file directly in federal court.</p>
+
+  <h3>OSHA Retaliation (29 U.S.C. &sect; 660(c))</h3>
+  <p>OSHA Section 11(c) remedies include reinstatement to the same position, back pay with interest for the period of lost employment, and attorney fees. OSHA investigates the complaint and, if meritorious, the agency may seek reinstatement and back pay in federal district court. The critical constraint is the 30-day filing deadline — the shortest in federal anti-retaliation law. Missing this deadline permanently bars the Section 11(c) claim. If you were fired for reporting a safety violation, contact OSHA or an attorney within the first week after termination.</p>
+
+  <h3>Workers&rsquo; Compensation and State Law Claims</h3>
+  <p>Workers&rsquo; comp retaliation is a state law claim with wide variation in available remedies. Most states provide reinstatement, back pay, and compensatory damages. Some states add multiplied damages — California imposes a 50% add-on to disability benefits; other states provide treble damages for willful retaliation. State whistleblower statutes may provide broader coverage and stronger remedies than their federal counterparts, particularly in states like California, New Jersey, and New York. Section 1981, the federal race discrimination statute with no damages caps, provides another avenue when race is a component of the protected activity.</p>
+
+  <h2>The Mitigation Requirement</h2>
+  <p>Employees who are retaliatorily discharged have a legal duty to mitigate their damages by making reasonable efforts to find comparable employment. Courts will reduce back pay awards by the amount the employee earned (or reasonably should have earned) through mitigation efforts. The failure to actively seek new work — sending applications, interviewing, updating the resume — can result in a significant reduction of the back pay award even in a strong retaliation case. Document your job search efforts from day one: application dates, employers contacted, interviews attended, and offers received or rejected.</p>
+
+  <h2>Critical Deadlines</h2>
+  <p>The deadlines for retaliation claims vary dramatically by statute and are some of the most strictly enforced in employment law. Missing a deadline can permanently eliminate a meritorious claim:</p>
+  <ul>
+    <li><strong>OSHA Section 11(c):</strong> 30 days from the date of the retaliatory act. The most urgent deadline in employment law.</li>
+    <li><strong>Title VII, ADA, ADEA, GINA:</strong> 180 days to file an EEOC charge (300 days in deferral states, which include most populous states). You cannot file in federal court without first going through the EEOC.</li>
+    <li><strong>FLSA retaliation:</strong> 2 years from the retaliatory act (3 for willful). No EEOC filing required.</li>
+    <li><strong>Section 1981:</strong> 4 years. No EEOC filing required.</li>
+    <li><strong>State law claims:</strong> 1–3 years depending on the state and claim type.</li>
+  </ul>
+
+  <h2>Learn More</h2>
+  <ul>
+    <li><a href="/guides/how-retaliation-claims-work">How retaliation claims work</a></li>
+    <li><a href="/guides/types-of-retaliation">Types of protected activity and retaliation</a></li>
+    <li><a href="/guides/what-to-do-after-retaliatory-firing">What to do after retaliatory firing</a></li>
+    <li><a href="/guides/retaliation-misconceptions">Common misconceptions</a></li>
+    <li><a href="/case-types">Case types overview</a></li>
+    <li><a href="/methodology">Calculator methodology</a></li>
+    <li><a href="/faq">Frequently asked questions</a></li>
+  </ul>
+
   <script>
     document.getElementById('calc').addEventListener('submit', e => {
       e.preventDefault();

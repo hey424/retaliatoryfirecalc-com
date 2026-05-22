@@ -1,13 +1,60 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 const title = 'Methodology | retaliatoryfirecalc.com';
-const description = 'How the retaliatory discharge damages calculator works across Title VII, FLSA, Section 1981, and state law frameworks.';
+const description = 'How the retaliatory discharge damages calculator models Title VII, FLSA, Section 1981, OSHA, and state workers comp retaliation claims — step by step.';
 ---
 <BaseLayout title={title} description={description}>
   <h1>Methodology</h1>
-  <p><em>Reviewed by Riley Chen (RC), Employment &amp; Civil Rights Practice Lead. Updated May 2026.</em></p>
-  <h2>Title VII retaliation</h2><p>Back pay + front pay (uncapped) + compensatory (40% of cap) + punitive (30% of cap). Cap by employer size: $50K/$100K/$200K/$300K.</p>
-  <h2>FLSA retaliation</h2><p>Back pay + equal liquidated damages (automatic doubling). No cap. Plus attorney fees. The liquidated damages provision mirrors the FMLA and ADEA frameworks.</p>
-  <h2>Section 1981 (race)</h2><p>No damages caps. Compensatory estimated at 80% of back pay; punitive at 120% of back pay. Wide range reflects variability in uncapped jury verdicts.</p>
-  <h2>Workers&rsquo; comp / state / OSHA</h2><p>Highly state-specific. Calculator estimates compensatory at 50% of back pay as a conservative proxy. Actual damages vary from full reinstatement + back pay to treble damages depending on state law.</p>
+  <p><em>Reviewed by Cleo Delmar (CD), Editor-in-Chief &mdash; Employment & Civil Rights Practice. Updated May 2026.</em></p>
+
+  <p>This page documents how the retaliatory discharge damages calculator produces its estimates. Every input, every formula, and every assumption is disclosed here so users understand exactly what is being modeled and where the limitations lie. Retaliation damages are highly statute-specific, and this calculator handles five distinct frameworks. Understanding which framework applies to your situation is the first step to a useful estimate.</p>
+
+  <h2>Step 1: Identifying the Controlling Statute</h2>
+  <p>The most important calculation variable is the retaliation statute under which the claim is brought. Federal anti-retaliation law is not unified — different statutes create different damage frameworks, different procedural requirements, and different caps. The calculator asks users to select among six frameworks:</p>
+  <ul>
+    <li><strong>Title VII (42 U.S.C. &sect; 2000e-3):</strong> Covers retaliation for complaining about race, color, religion, sex, or national origin discrimination. Damages include back pay (uncapped), front pay (uncapped at court discretion), and compensatory and punitive damages capped by employer size. Attorney fees mandatory if you prevail.</li>
+    <li><strong>FLSA (29 U.S.C. &sect; 215(a)(3)):</strong> Covers retaliation for wage/overtime complaints. Damages: lost wages plus an equal amount in liquidated damages (automatic doubling), plus attorney fees. No employer-size caps. The doubling provision makes FLSA retaliation one of the most valuable per-dollar claims available.</li>
+    <li><strong>OSHA Section 11(c) (29 U.S.C. &sect; 660(c)):</strong> Covers retaliation for reporting safety violations. Remedies include reinstatement, back pay with interest, and attorney fees. Must be filed with OSHA within 30 days — the shortest deadline in anti-retaliation law.</li>
+    <li><strong>Workers&rsquo; Compensation Retaliation (state law):</strong> Coverage and remedies vary by state. Many states provide back pay, reinstatement, and in some jurisdictions treble damages or civil penalties. The calculator applies a conservative 50% multiplier of back pay as a proxy — actual results vary widely.</li>
+    <li><strong>State Wrongful Termination / Whistleblower (state law):</strong> General state whistleblower and public policy tort claims. Wide variation in available damages. Calculator uses same conservative proxy as workers&rsquo; comp retaliation.</li>
+    <li><strong>Section 1981 (42 U.S.C. &sect; 1981):</strong> Race discrimination retaliation claim that has no damages caps. Compensatory and punitive damages are uncapped, producing the widest range of outcomes in the calculator.</li>
+  </ul>
+
+  <h2>Step 2: Back Pay Calculation</h2>
+  <p>Back pay is the economic foundation of nearly every retaliation claim. It represents the wages, salary, and benefits the employee would have earned from the date of termination through the date of judgment (or settlement) had the retaliatory firing not occurred. The formula:</p>
+  <p><strong>Back Pay = (Annual Salary ÷ 12) × Months of Lost Employment × (1 &minus; Mitigation Reduction)</strong></p>
+  <p>Mitigation reduction is applied based on whether the employee has found comparable replacement work. Courts require employees to make good-faith efforts to mitigate damages by seeking similar employment — a failure to mitigate reduces or eliminates the back pay award. The calculator applies three mitigation scenarios:</p>
+  <ul>
+    <li><strong>Not yet found work (0% reduction):</strong> Full back pay through the projected judgment date. No mitigation reduction is applied, but the court will likely reduce the award if the employee unreasonably failed to seek new work.</li>
+    <li><strong>Partial mitigation (35% reduction):</strong> The employee found lower-paying replacement work. The 35% reduction approximates a partial offset where replacement earnings cover roughly a third of the loss. Actual offset depends on the earnings differential.</li>
+    <li><strong>Full mitigation (70% reduction):</strong> The employee found comparable replacement work. The 70% reduction reflects that most, but not all, back pay exposure is offset — some period of gap earnings remains during the job search itself.</li>
+  </ul>
+  <p>Note that back pay in Title VII, FLSA, and Section 1981 cases is calculated from the date of the adverse action through the date of trial or settlement — it is forward-looking as well as backward-looking when trials are delayed. Front pay (anticipated future losses) is modeled separately.</p>
+
+  <h2>Step 3: Front Pay</h2>
+  <p>Front pay is awarded in lieu of reinstatement when reinstatement is impractical — typically because the working relationship is too damaged, the position has been eliminated, or the employer-employee conflict would make reinstatement futile. The calculator estimates front pay as 50% of annual salary when the employee has not yet found comparable work, applied as a single-year proxy for the present value of anticipated future losses. This is a conservative estimate: front pay awards in actual cases have ranged from zero (when reinstatement is ordered) to several years of salary (when the court finds the employee's career prospects have been substantially impaired).</p>
+
+  <h2>Step 4: Compensatory and Punitive Damages (Title VII)</h2>
+  <p>Under 42 U.S.C. &sect; 1981a(b)(3), Title VII compensatory and punitive damages are capped by employer size:</p>
+  <ul>
+    <li>15&ndash;100 employees: $50,000 combined cap</li>
+    <li>101&ndash;200 employees: $100,000 cap</li>
+    <li>201&ndash;500 employees: $200,000 cap</li>
+    <li>500+ employees: $300,000 cap</li>
+  </ul>
+  <p>The calculator models compensatory damages at 40% of the applicable cap and punitive damages at 30%, for a combined 70% utilization of the statutory ceiling. This is a middle-range assumption — cases with strong evidence of intentional retaliation and emotional distress testimony regularly reach the full cap, while cases with weaker facts yield lower awards within the range.</p>
+
+  <h2>Step 5: FLSA Liquidated Damages</h2>
+  <p>For FLSA retaliation claims, the statute provides for an equal amount of liquidated damages equal to the back pay lost. The calculator models this as a direct 1:1 multiplier on the back pay component. Liquidated damages under the FLSA are effectively automatic unless the employer proves both good faith and a reasonable basis to believe their conduct was lawful — a high bar that employers rarely meet in retaliation cases where the retaliatory motive is established.</p>
+
+  <h2>Step 6: Section 1981 Uncapped Damages</h2>
+  <p>Section 1981 race claims carry no damages caps under the Civil Rights Act of 1991. The calculator models compensatory damages at 80% of back pay and punitive damages at 120% of back pay as representative midpoints from verdict data. The actual range in uncapped cases is wide — significant verdicts can reach multiples of back pay, while cases with thinner evidence of intentional conduct yield lower punitive assessments.</p>
+
+  <h2>Step 7: Output Range (±35%)</h2>
+  <p>The calculator outputs a low-to-high estimate range by applying a &plusmn;35% band around the point estimate: the low end is 55% of the calculated total and the high end is 135%. This band reflects the inherent variance in jury verdicts, judicial discretion in front pay, and the unpredictability of punitive damage determinations. Employment litigation outcomes vary substantially based on the quality of evidence, the jurisdiction's case history, and the specific facts that go to a jury.</p>
+
+  <h2>What the Calculator Does Not Model</h2>
+  <p>The calculator does not model: emotional distress damages in contexts where expert testimony and documented medical treatment would significantly affect the award; the value of benefits (health insurance, retirement contributions, stock options) lost alongside wages; interest on back pay; tax gross-up awards for the tax consequences of receiving a lump sum; multiple retaliation claims filed under different statutes in the same action; state-specific multiplier penalties (some states provide treble damages for workers&rsquo; comp retaliation); or the impact of EEOC charge-filing failures that might bar certain claims. Attorney fees — which are mandatory and often substantial in successful retaliation cases — are also not included in the estimate.</p>
+
+  <p>Return to the <a href="/">calculator</a> or see the <a href="/guides/how-retaliation-claims-work">how retaliation claims work guide</a>.</p>
 </BaseLayout>
