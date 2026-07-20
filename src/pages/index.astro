@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import LeadCapture from '../components/LeadCapture.astro';
 const title = 'Retaliatory Discharge Damages Calculator | retaliatoryfirecalc.com';
 const description = 'Estimate potential damages for retaliatory termination under Title VII, FLSA, OSHA, workers comp retaliation, and state wrongful termination. Free, informational.';
 ---
@@ -38,7 +39,10 @@ const description = 'Estimate potential damages for retaliatory termination unde
     </select>
     <button type="submit">Estimate damages</button>
   </form>
-  <p id="result" aria-live="polite"></p>
+  
+
+  <LeadCapture caseType="workplace_retaliation" caseTypeLabel="Workplace Retaliation" />
+<p id="result" aria-live="polite"></p>
 
   <h2>How Retaliation Damages Are Calculated</h2>
   <p>Retaliation damages are statute-specific — the amount recoverable and the components of the award depend entirely on which anti-retaliation law applies to your situation. There is no single unified framework, which is why identifying the right statute is the first step in any retaliation claim analysis. Here is how each major framework works:</p>
@@ -70,13 +74,13 @@ const description = 'Estimate potential damages for retaliatory termination unde
 
   <h2>Learn More</h2>
   <ul>
-    <li><a href="/guides/how-retaliation-claims-work">How retaliation claims work</a></li>
-    <li><a href="/guides/types-of-retaliation">Types of protected activity and retaliation</a></li>
-    <li><a href="/guides/what-to-do-after-retaliatory-firing">What to do after retaliatory firing</a></li>
-    <li><a href="/guides/retaliation-misconceptions">Common misconceptions</a></li>
-    <li><a href="/case-types">Case types overview</a></li>
-    <li><a href="/methodology">Calculator methodology</a></li>
-    <li><a href="/faq">Frequently asked questions</a></li>
+    <li><a href="/guides/how-retaliation-claims-work/">How retaliation claims work</a></li>
+    <li><a href="/guides/types-of-retaliation/">Types of protected activity and retaliation</a></li>
+    <li><a href="/guides/what-to-do-after-retaliatory-firing/">What to do after retaliatory firing</a></li>
+    <li><a href="/guides/retaliation-misconceptions/">Common misconceptions</a></li>
+    <li><a href="/case-types/">Case types overview</a></li>
+    <li><a href="/methodology/">Calculator methodology</a></li>
+    <li><a href="/faq/">Frequently asked questions</a></li>
   </ul>
 
   <script>
